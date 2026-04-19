@@ -13,7 +13,7 @@
 
 - **Question:** Analyze the `auth.log`. What is the IP address used by the attacker to carry out a brute force attack?
 
-- **Analysic:**
+- **Analysis:**
   - The auth.log file records all successful and failed logins, as well as commands executed with sudo privileges.
   - When an attacker performs a brute-force attack, they generate a massive amount of failed login logs.
   - Filter the lines containing "Failed password" to see which IP appears the most frequently: `cat auth.log | grep "Failed password"`
@@ -25,7 +25,7 @@
 
 - **Question:** The bruteforce attempts were successful and attacker gained access to an account on the server. What is the username of the account?
 
-- **Analysic:**
+- **Analysis:**
   - When the attacker guess the correct password and login successfully, the log will record an "Accepted password".
   - Filter the lines containing "Accepted password": `cat auth.log | grep "Accepted password"`.
   
@@ -43,9 +43,10 @@
 
 - **Question:** Identify the UTC timestamp when the attacker logged in manually to the server and established a terminal session to carry out their objectives. The login time will be different than the authentication time, and can be found in the wtmp artifact.
 
-- **Analysic:**
-  - Run utmp.py to read the Linux utmp file and export current user login session information into a TSV: `python3 utmp.py wtmp | grep "65.2.161.68`
-  - 
+- **Analysis:**
+
+  - Run `utmp.py` to read the Linux utmp file and export current user login session information into a TSV: `python3 utmp.py wtmp | grep "65.2.161.68`
+
   ![alt text](image/image-5.png)
   ![alt text](image/image-6.png)
 
@@ -53,7 +54,7 @@
 
 - **Question:** SSH login sessions are tracked and assigned a session number upon login. What is the session number assigned to the attacker's session for the user account from Question 2?
 
-- **Analysic:**
+- **Analysis:**
 
   - Run command: `grep "root" auth.log | grep "New session"`
   
@@ -67,7 +68,7 @@
 
 - **Question:** The attacker added a new user as part of their persistence strategy on the server and gave this new user account higher privileges. What is the name of this account?
 
-- **Analysic:**
+- **Analysis:**
 
 ![alt text](image/image-10.png)
 
@@ -75,7 +76,7 @@
 
 - **Question:** What is the MITRE ATT&CK sub-technique ID used for persistence by creating a new account?
 
-- **Analysic:**
+- **Analysis:**
   - Search google.com :))
 
 ![alt text](image/image-12.png)
@@ -86,7 +87,7 @@
 
 - **Question:** What time did the attacker's first SSH session end according to `auth.log`?
 
-- **Analysic:**
+- **Analysis:**
   - Run command: `grep "root" auth.log | grep "session"`
     - CRON is a system scheduler that runs automated tasks.
     - sshd is the Secure Shell service used by the attacker to login.
@@ -99,7 +100,7 @@
 
 - **Question:** The attacker logged into their backdoor account and utilized their higher privileges to download a script. What is the full command executed using sudo?
 
-- **Analysic:**
+- **Analysis:**
   - Run command: `grep "sudo" auth.log | grep "cyberjunkie"`
 
 ![alt text](image/image-15.png)
