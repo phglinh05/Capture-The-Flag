@@ -1,0 +1,12 @@
+- Quan sát gói tin truy cập lab, ta thấy ở trường Set-Cookie trong gói Response có đoạn token mã hóa base64
+- Giải mã base64, kết quả hiển thị ở dạng Raw Bytes (đối tượng pickle của Python).
+- Chuyển mã đã giải base64 sang dạng hex để dễ đọc:
+- Ta thấy được đoạn 61646d696e: admin sau đó là 944b00: x94Kx00
+- Trong pickle:
+  - K = opcode cho INTEGER
+  - \x00 = giá trị số 0 (dạng byte)
+  - K00 = K + \x00 = integer value 0
+- Có thể hiểu là admin được set là 0 => set admin lên 1 sẽ vào được quyền admin
+- Đổi 00 thành 01 => encode lại base64
+- Sửa value của token trong Cookie thành đoạn ta mới mã hóa base64
+- Forward gói tin => Nhận được secret key của admin

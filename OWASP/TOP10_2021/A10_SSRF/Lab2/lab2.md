@@ -1,0 +1,7 @@
+- Trên giao diện hiển thị một form nhập url và nút submit
+- Xem thử đoạn code, thấy được ý nghĩa chính:
+  - Sau khi nhập url, trang web sẽ gửi url với phương thức POST lên máy chủ. 
+  - Máy chủ sẽ truy cập url thay ta và trả về kết quả
+- Ta có một file ssrf_target bí mật nằm ở phía máy chủ. 
+  - Khi dùng IP của ta truy cập thì hiển thị invalid URL => Không truy cập được
+  - Dùng luôn chính IP máy chủ localhost => máy chủ tự truy cập chính nó và trả hẳn về file ssrf_target.
